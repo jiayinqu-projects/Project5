@@ -23,10 +23,10 @@ Baggr_tbl <- Bdata_tbl %>%
   spread(stimver, meanScore)
 Aaggr_tbl <- Aaggr_tbl %>% full_join(Anotes_tbl, by = "parnum")
 Baggr_tbl <- Baggr_tbl %>% full_join(Bnotes_tbl, by = "parnum")
-Aaggr_tbl %>% mutate(type = "Alab") %>%
-  bind_rows(Baggr_tbl %>% mutate(type = "Blab")) %>%
+Aaggr_tbl %>% 
+  bind_rows(Baggr_tbl, .id = "identifier") %>%
   filter(is.na(notes) == TRUE) %>%
-  count(type)
+  count(identifier)
 
   
   
